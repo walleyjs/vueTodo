@@ -21,10 +21,15 @@ export default {
   },
   methods: {
     completeItem () {
-      this.todo.completed = true
+    this.$services.todo.complete(this.todo).then((data) => {
+    this.todo.completed = true
+  })
     },
     deleteItem () {
-      this.$emit('delete', this.todo)
+     this.$services.todo.deleteItem(this.todo.id).then(() => {
+    this.$emit('delete', this.todo)
+  })
+
     }
 }
 }

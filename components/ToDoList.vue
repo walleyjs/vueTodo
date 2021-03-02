@@ -33,8 +33,11 @@ export default {
   },
   methods: {
    create() {
-     this.todos.push({ id: this.titleOfNewToDo, title: this.titleOfNewToDo, completed: false })
-     this.titleOfNewToDo = ''
+        this.$services.todo.create(this.titleOfNewToDo).then((data) => {
+            this.titleOfNewToDo = ''
+        })
+    //  this.todos.push({ id: this.titleOfNewToDo, title: this.titleOfNewToDo, completed: false })
+    //  this.titleOfNewToDo = ''
    },
    deleteItem (item) {
       this.todos.splice(this.todos.indexOf(item), 1)

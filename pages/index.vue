@@ -13,7 +13,7 @@ export default {
    components: {
     ToDoList
   },
-  
+
   data () {
     return {
       todos: {
@@ -21,20 +21,21 @@ export default {
       }
     }
   },
-  asyncData (ctx) {
+    async asyncData (ctx) {
     return {
-      todos: [
-        {
-          'id': '1',
-          'title': 'A',
-          'completed': false
-        },
-        {
-          'id': '2',
-          'title': 'B',
-          'completed': true
-        }
-      ]
+      todos: await ctx.app.$services.todo.findAll()
+      // todos: [
+      //   {
+      //     'id': '1',
+      //     'title': 'A',
+      //     'completed': false
+      //   },
+      //   {
+      //     'id': '2',
+      //     'title': 'B',
+      //     'completed': true
+      //   }
+      // ]
     }
   }
 }
