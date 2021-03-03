@@ -47,6 +47,6 @@ export default {
     prefix: '/'
   },
   proxy: {
-    '/api/': 'http://localhost:8000/'
+    '/api/': 'https://vuetodoo.herokuapp.com/'
   },
 }

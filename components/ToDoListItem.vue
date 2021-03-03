@@ -21,12 +21,16 @@ export default {
   },
   methods: {
     completeItem () {
-    this.$services.todo.complete(this.todo).then((data) => {
-    this.todo.completed = true
-  })
+    // this.$services.todo.complete(this.todo).then((data) => {
+    // this.todo.completed = true
+    console.log('comp', this.todo)
+//   })
     },
+
     deleteItem () {
-     this.$services.todo.deleteItem(this.todo.id).then(() => {
+     this.$services.todo.deleteItem(this.todo.id).then((data) => {
+         console.log("delete",data.data)
+            
     this.$emit('delete', this.todo)
   })
 
@@ -46,7 +50,7 @@ export default {
     height: 50px;
     padding-left: 20px;
     line-height: 50px;
-    width: 300px;
+    width: 400px;
     display: inline-block;
   }
   .controls {

@@ -21,9 +21,10 @@ export default {
       }
     }
   },
-    async asyncData (ctx) {
+     asyncData (ctx) {
     return {
-      todos: await ctx.app.$services.todo.findAll()
+      todos: ctx.app.$services.todo.findAll()
+     
       // todos: [
       //   {
       //     'id': '1',

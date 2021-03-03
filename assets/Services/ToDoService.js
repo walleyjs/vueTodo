@@ -9,12 +9,12 @@ export default class ToDoApi {
     findAll () {
       return this.axios({
         method: 'get',
-        url: 'http://localhost:8000/newtodo',
+        url: 'https://vuetodoo.herokuapp.com/newtodo',
         withCredentials: true
       }).then((response) => {
         const todos = []
         response.data.forEach((todo) => {
-          todos.push(new ToDo(todo.id, todo.todo, todo.completed))
+          todos.push(new ToDo(todo._id, todo.todo, todo.completed))
         })
         return todos
       })
@@ -22,24 +22,39 @@ export default class ToDoApi {
 
     }
   
+    
     create (title) {
       return this.axios({
         method: 'post',
-        url: 'http://localhost:8000/newtodo',
+        url: 'https://vuetodoo.herokuapp.com/newtodo',
         data: {
         todo: title,
         completed: false
         },
-        withCredentials: true
+       
+        withCredentials: false
       }).then((response) => {
-        return response.data
+          
+    //    console.log(response.data)
+       return this.axios({
+        method: 'get',
+        url: 'https://vuetodoo.herokuapp.com/newtodo',
+        withCredentials: false
+      }).then((response) => {
+        const todos = []
+        response.data.forEach((todo) => {
+            // console.log(todo)
+          todos.push(new ToDo(todo._id, todo.todo, todo.completed))
+        })
+        return todos
+      })
       })
     }
   
     complete (todo) {
       return this.axios({
         method: 'put',
-        url: 'http://localhost:8000/newtodoedit',
+        url: 'https://vuetodoo.herokuapp.com/newtodoedit',
         data: {
           id: todo.id,
           title: todo.title,
@@ -54,8 +69,11 @@ export default class ToDoApi {
     deleteItem (id) {
       return this.axios({
         method: 'delete',
-        url: 'newtododel',
-        withCredentials: true
+        url: 'https://vuetodoo.herokuapp.com/newtododel',
+        data: {
+            'tId':id
+            },
+        withCredentials: false
       })
     }
   }

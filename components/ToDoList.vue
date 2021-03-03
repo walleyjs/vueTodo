@@ -7,7 +7,7 @@
       </button>
     </div>
     <div class="to-do-list-container">
-  <to-do-list-item v-for="todo in todos" :key="todo.id" :todo="todo" v-on:delete="deleteItem" />
+  <to-do-list-item v-for="todo in todos" :key="todo.id" :todo="todo"  />
 </div>
   </div>
 </template>
@@ -28,20 +28,22 @@ export default {
   },
   data () {
     return {
-      titleOfNewToDo: ''
+      titleOfNewToDo: '',
+    //    todos: this.$props.todos,
     }
   },
   methods: {
    create() {
         this.$services.todo.create(this.titleOfNewToDo).then((data) => {
-            this.titleOfNewToDo = ''
+            //  this.$emit('create', data)
+          this.todos= data
+             console.log("date",data[0].id)
+           this.titleOfNewToDo = ''
         })
     //  this.todos.push({ id: this.titleOfNewToDo, title: this.titleOfNewToDo, completed: false })
     //  this.titleOfNewToDo = ''
    },
-   deleteItem (item) {
-      this.todos.splice(this.todos.indexOf(item), 1)
-    }
+
 }
 }
 </script>
